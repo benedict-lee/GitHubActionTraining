@@ -24,13 +24,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: Check-out d2hub build&push action
+        uses: actions/checkout@v2
+        with:
+          repository: actions/setup-node
+          path: .github/actions/setup-node
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17'
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - uses: ./.github/actions/GitHubActionTraining@master
+      - uses: ./.github/actions/setup-node@v3
 
 
       # Runs a single command using the runners shell
